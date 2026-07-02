@@ -1,0 +1,22 @@
+---
+//This component sets home page hero section under primary menu, background image is set when provided, background color default to bg-primary
+const { hero_image } = Astro.props;
+// TODO: figure out how to properly serve a separate image at mobile breakpoint
+const style = `background: url(${hero_image.src}) no-repeat 90% 50%;`;
+---
+
+<section class="padding-y-4 usa-hero">
+  <div class="grid-container" style={style}>
+    <div class="usa-hero__callout">
+      <h1 class="usa-hero__heading">
+        <span class="usa-hero__heading"><slot /></span>
+      </h1>
+      <p v-if="$slots.headline">
+        <slot name="headline" />
+      </p>
+      <div v-if="$slots.linkbutton">
+        <slot name="linkbutton" />
+      </div>
+    </div>
+  </div>
+</section>

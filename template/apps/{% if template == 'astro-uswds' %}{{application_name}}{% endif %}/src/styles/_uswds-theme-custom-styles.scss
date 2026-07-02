@@ -1,0 +1,90 @@
+/*
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+========================================
+========================================
+========================================
+----------------------------------------
+USWDS THEME CUSTOM STYLES
+----------------------------------------
+!! Copy this file to your project's
+   sass root. Don't edit the version
+   in node_modules.
+----------------------------------------
+Custom project SASS goes here.
+
+i.e.
+@include u-padding-right('05');
+----------------------------------------
+*/
+
+@use "uswds-core" as *;
+
+
+$logo-size-mobile: 3;
+$logo-size-desktop: 3;
+
+html,
+body {
+   height: 100%;
+   scroll-behavior: smooth;
+}
+
+.flex-shrink-0 {
+   flex-shrink: 0;
+}
+
+#app {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   flex-wrap: nowrap;
+}
+
+.flex-fill {
+   flex: 1 0 auto;
+}
+
+
+// below to resolve the mobile issue for full size template page ( without side nav)
+@media screen and (max-width:768px) {
+   body {
+      width: fit-content;
+   }
+}
+
+
+.usa-header,
+.usa-header--extended {
+   .usa-logo {
+
+      // address mobile view logo too big issue
+      @media screen and (max-width:1023px) {
+         .usa-logo-img {
+            // height: 2rem;
+         }
+      }
+
+      &__text {
+         &::before {
+            @include u-square($logo-size-mobile);
+            content: "";
+            background-image: url("/images/gsa-logo.svg");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            display: inline-block;
+            margin-left: units(-2px);
+            margin-right: units(0.5);
+            position: relative;
+            top: units(-1px);
+            vertical-align: middle;
+
+            @include at-media("desktop") {
+               @include u-square($logo-size-desktop);
+            }
+         }
+      }
+   }
+}

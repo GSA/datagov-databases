@@ -1,0 +1,20 @@
+- title: Resources
+  href: resources/
+  submenu:
+    - title: Action Plan
+      href: resources/action-plan/
+    - title: Data Standard
+      href: resources/data-standard/
+
+- title: Projects
+  href: projects/
+  submenu:
+    - title: CE Explorer
+      href: "https://ce.permitting.innovation.gov"
+      newTab: true
+
+- title: About
+  href: about/
+
+- title: Contact
+  href: contact/

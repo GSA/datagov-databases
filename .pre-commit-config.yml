@@ -1,0 +1,19 @@
+# Configuration for https://pre-commit.com/
+# A task in the template runs pre-commit with this file
+# A placeholder for specifying the target path where the hooks apply 
+# should exist in here! 
+repos:
+  - repo: local
+    hooks:
+      # Prevent committing .rej files from merge conflicts
+      # These might be created by the copier update command
+      - id: forbidden-files
+        name: forbidden files
+        entry:
+          found Copier update rejection files; review and remove them before
+          merging.
+        language: fail
+        files: "\\.rej$"
+      # Prevent committing inline conflict markers
+      - id: check-merge-conflict
+        args: [--assume-in-merge]

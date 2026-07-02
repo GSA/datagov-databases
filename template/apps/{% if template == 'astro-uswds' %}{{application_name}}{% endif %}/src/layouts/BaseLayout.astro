@@ -1,0 +1,86 @@
+---
+import GSAHeader from "@components/GSAHeader.astro";
+import USAIdentifier from "@components/USAIdentifier.astro";
+import Banner from "@components/Banner.astro";
+import Analytics from "@components/Analytics.astro";
+
+const { title, description } = Astro.props;
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <Analytics />
+    <script is:inline src={`${import.meta.env.BASE_URL}js/uswds-init.min.js`}
+    ></script>
+    <link
+      rel="stylesheet"
+      href={`${import.meta.env.BASE_URL}styles/styles.css`}
+    />
+    <link rel="sitemap" href={`${import.meta.env.BASE_URL}sitemap-index.xml`} />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href={`${import.meta.env.BASE_URL}favicon.ico`}
+    />
+    <link
+      rel="android-chrome-192x192"
+      sizes="180x180"
+      href={`${import.meta.env.BASE_URL}android-chrome-192x192.png`}
+    />
+    <link
+      rel="android-chrome-512x512"
+      sizes="180x180"
+      href={`${import.meta.env.BASE_URL}android-chrome-512x512.png`}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={`${import.meta.env.BASE_URL}apple-touch-icon.png`}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={`${import.meta.env.BASE_URL}favicon-32x32.png`}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href={`${import.meta.env.BASE_URL}favicon-16x16.png`}
+    />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:url" content={Astro.url} />
+    <meta
+      property="og:image"
+      content={`${import.meta.env.BASE_URL}images/PTAP-image.svg`}
+    />
+    <meta property="og:description" content={description} />
+    <base href={import.meta.env.BASE_URL} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="app" class="grid-row flex flex-column height-full">
+      <a class="usa-skipnav" href=`${Astro.url}./#main-content`
+        >Skip to main content</a
+      >
+      <Banner />
+      <div class="background flex-fill">
+        <GSAHeader />
+        <div class="wide-layout">
+          <slot />
+        </div>
+      </div>
+      <USAIdentifier />
+    </div>
+    <script is:inline src={`${import.meta.env.BASE_URL}js/uswds.min.js`}
+    ></script>
+  </body>
+</html>

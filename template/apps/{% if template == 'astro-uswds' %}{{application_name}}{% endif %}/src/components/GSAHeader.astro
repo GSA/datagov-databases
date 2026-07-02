@@ -1,0 +1,136 @@
+---
+/* Header component with logo, top search, and primary menu navigation */
+const AgencyLogo = "/images/gsa-logo.svg";
+const searchIcon = "/images/usa-icons/search.svg";
+
+import PrimaryMenu from "@components/PrimaryMenu.astro";
+---
+
+<div class="usa-overlay"></div>
+<header class="usa-header usa-header--extended site-header">
+  <div class="usa-navbar">
+    <div class="usa-logo">
+      <em class="usa-logo__text site-logo__text"
+        ><a href="/" title="<Project title>">&lt;Agency Name&gt;</a></em
+      >
+    </div>
+    <button type="button" class="usa-menu-btn">Menu</button>
+  </div>
+  <nav aria-label="Primary navigation" class="usa-nav">
+    <div class="usa-nav__inner">
+      <button type="button" class="usa-nav__close">
+        <img src="/assets/img/usa-icons/close.svg" role="img" alt="Close" />
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link usa-current"
+            aria-expanded="false"
+            aria-controls="extended-nav-section-one"
+          >
+            <span>&lt;Current section&gt;</span>
+          </button>
+          <ul id="extended-nav-section-one" class="usa-nav__submenu">
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+                ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+                ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+                ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+                ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="extended-nav-section-two"
+          >
+            <span>&lt;Section&gt;</span>
+          </button>
+          <ul id="extended-nav-section-two" class="usa-nav__submenu">
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+                ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+                ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="javascript:void(0);"
+                ><span>&lt;Navigation link&gt;</span></a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <a href="javascript:void(0);" class="usa-nav-link"
+            ><span>&lt;Simple link&gt;</span></a
+          >
+        </li>
+      </ul>
+      <div class="usa-nav__secondary">
+        <ul class="usa-nav__secondary-links"></ul>
+        <section aria-label="Search component">
+          <form class="usa-search usa-search--small" role="search">
+            <label class="usa-sr-only" for="search-field">Search</label>
+            <input
+              class="usa-input"
+              id="search-field"
+              type="search"
+              name="search"
+            />
+            <button class="usa-button" type="submit">
+              <img
+                src={searchIcon}
+                class="usa-search__submit-icon"
+                alt="Search"
+              />
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Target elements with class touchpoints-feedback-button-class and add the touchpoints-feedback-button ID to the one which is visible
+  document.addEventListener("DOMContentLoaded", () => {
+    const feedbackButtons = document.querySelectorAll(
+      ".touchpoints-feedback-button-class",
+    );
+    feedbackButtons.forEach((button) => {
+      const computedStyle = window.getComputedStyle(button);
+      if (computedStyle.display !== "none") {
+        button.id = "touchpoints-feedback-button";
+      }
+    });
+  });
+</script>
+
+<style>
+  .usa-search__submit-icon {
+    /* change color of icon to white */
+    filter: invert(99%) sepia(74%) saturate(0%) hue-rotate(323deg)
+      brightness(120%) contrast(100%);
+  }
+</style>
