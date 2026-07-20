@@ -1,0 +1,76 @@
+name: 1 - Commit
+on: [push]
+
+permissions:
+    contents: read
+
+env:
+  PY_VERSION: "3.12.13"
+  POETRY_VERSION: "latest"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Python Lint
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python ${{ env.PY_VERSION }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PY_VERSION }}
+
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v4
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
+          poetry-plugins: "poetry-plugin-export"
+
+      - name: Install Dependencies
+        run: |
+          poetry env use ${{ env.PY_VERSION }}
+          poetry install
+
+      - name: Run linting
+        run: make lint
+
+  test:
+    runs-on: ubuntu-latest
+    name: Pytests
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Create local .env from sample
+        run: cp .env.sample .env
+
+      - name: Set up Python ${{ env.PY_VERSION }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PY_VERSION }}
+
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v4
+        with:
+          poetry-version: ${{ env.POETRY_VERSION }}
+          poetry-plugins: "poetry-plugin-export"
+
+      - name: Install Dependencies
+        run: |
+          poetry env use ${{ env.PY_VERSION }}
+          poetry install
+
+      - name: Start Services
+        run: make up
+
+      - name: Run PyTests
+        env:
+          DATABASE_URI: postgresql+psycopg://myuser:mypassword@localhost:5432/mydb
+          OPENSEARCH_HOST: localhost
+        run: |
+          poetry run pytest
