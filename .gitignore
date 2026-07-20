@@ -1,2 +1,22 @@
+# misc system files
 .DS_STORE
 
+# env vars
+.env
+
+# python cache
+.pytest_cache
+.ruff_cache
+__pycache__
+
+# vsc settings
+.vscode
+
+# virtual env
+.venv
+
+# pytest
+.coverage
+.pytest_cache
+pytest.xml
+pytest-coverage.txt
