@@ -12,6 +12,7 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
+    UniqueConstraint,
     func,
     select,
     text,
@@ -49,11 +50,12 @@ class Error(Base):
 
 class Organization(Base):
     __tablename__ = "organization"
+    __table_args__ = (UniqueConstraint("slug", name="uq_organization_slug"),)
 
     name = Column(String, nullable=False, index=True)
     logo = Column(String)
     description = Column(Text)
-    slug = Column(String(100), unique=True, index=True, nullable=False)
+    slug = Column(String(100), nullable=False)
 
     organization_type = Column(
         Enum(
@@ -243,6 +245,7 @@ class HarvestRecord(Base):
     errors = relationship("HarvestRecordError", backref="record", lazy=True)
 
     __table_args__ = (
+        Index("ix_harvest_record_harvest_job_id", "harvest_job_id"),
         Index(
             "ix_harvest_record_source_identifier_created_success",
             harvest_source_id,
@@ -343,6 +346,8 @@ class HarvestJobError(Error):
         nullable=False,
     )
 
+    __table_args__ = (Index("ix_harvest_job_error_harvest_job_id", "harvest_job_id"),)
+
 
 class HarvestRecordError(Error):
     __tablename__ = "harvest_record_error"
@@ -365,7 +370,10 @@ class HarvestRecordError(Error):
         server_default="error",
     )
 
-    __table_args__ = (Index("ix_hre_job_id", "harvest_job_id"),)
+    __table_args__ = (
+        Index("ix_hre_job_id", "harvest_job_id"),
+        Index("ix_harvest_record_error_harvest_record_id", "harvest_record_id"),
+    )
 
 
 class HarvestUser(Base):
