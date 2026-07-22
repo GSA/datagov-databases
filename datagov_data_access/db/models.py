@@ -86,6 +86,7 @@ class HarvestSource(Base):
             " AND source_type = 'waf-collection')",
             name="wafcollectionparenturl",
         ),
+        Index("ix_harvest_source_organization_id", "organization_id"),
     )
 
     organization_id = Column(
@@ -297,6 +298,7 @@ class Dataset(Base):
         ForeignKey("harvest_record.id", ondelete="CASCADE"),
         nullable=False,
         index=True,
+        unique=True,
     )
 
     popularity = Column(Integer, server_default="0")
